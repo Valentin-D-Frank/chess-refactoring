@@ -1,22 +1,27 @@
+package pieces;
+
+import game_logic.ChessGameBoard;
+import services.ChessGamePiece;
+
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 // -------------------------------------------------------------------------
 /**
- * Represents a Rook game piece.
+ * Represents a pieces.Rook game piece.
  *
  * @author Ben Katz (bakatz)
  * @author Myles David II (davidmm2)
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Rook extends ChessGamePiece{
+public class Rook extends ChessGamePiece {
 	protected Map<Integer, String> icons_map;
 	// private ArrayList<String> possibleMoves;
 	// ----------------------------------------------------------
 	/**
-	 * Create a new Rook object.
+	 * Create a new pieces.Rook object.
 	 *
 	 * @param board
 	 *            the board to create the rook on
@@ -27,11 +32,11 @@ public class Rook extends ChessGamePiece{
 	 * @param color
 	 *            either GamePiece.WHITE, BLACK, or UNASSIGNED
 	 */
-	public Rook( ChessGameBoard board, int row, int col, int color ){
+	public Rook(ChessGameBoard board, int row, int col, int color ){
 		super( board, row, col, color );
 	}
 	/**
-	 * Calculates the possible moves for this Rook.
+	 * Calculates the possible moves for this pieces.Rook.
 	 * @param board the board to check on
 	 * @return ArrayList<String> the list of moves
 	 */
@@ -57,9 +62,9 @@ public class Rook extends ChessGamePiece{
 	public ImageIcon createImageByPieceType() {
 		icons_map = new HashMap<Integer, String>();
 
-		icons_map.put(-1, "chessImages/default-Unassigned.gif");
-		icons_map.put(ChessGamePiece.BLACK, "chessImages/BlackRook.gif");
-		icons_map.put(ChessGamePiece.WHITE, "chessImages/WhiteRook.gif");
+		icons_map.put(-1, "../chessImages/default-Unassigned.gif");
+		icons_map.put(ChessGamePiece.BLACK, "../chessImages/BlackRook.gif");
+		icons_map.put(ChessGamePiece.WHITE, "../chessImages/WhiteRook.gif");
 		
 		return new ImageIcon(getClass().getResource(this.icons_map.get(getColorOfPiece())));
 	}

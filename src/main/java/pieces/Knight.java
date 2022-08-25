@@ -1,8 +1,13 @@
+package pieces;
+
+import game_logic.ChessGameBoard;
+import services.ChessGamePiece;
+
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 /**
- * Represents a Knight game piece.
+ * Represents a pieces.Knight game piece.
  *
  * @author Ben Katz (bakatz)
  * @author Myles David II (davidmm2)
@@ -10,9 +15,9 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Knight
-    extends ChessGamePiece{
+    extends ChessGamePiece {
     /**
-     * Knight constructor for gamePiece
+     * pieces.Knight constructor for gamePiece
      *
      * @param row
      *            the row to create the knight on
@@ -23,7 +28,7 @@ public class Knight
      * @param color
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public Knight( ChessGameBoard board, int row, int col, int color ){
+    public Knight(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
     }
     /**
@@ -75,7 +80,7 @@ public class Knight
         return moves;
     }
     /**
-     * Calculates the possible moves for this Knight.
+     * Calculates the possible moves for this pieces.Knight.
      *
      * @param board
      *            the game board to check
@@ -99,18 +104,18 @@ public class Knight
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
             return new ImageIcon(
-                getClass().getResource("chessImages/WhiteKnight.gif")
+                getClass().getResource("../chessImages/WhiteKnight.gif")
             );            
         }
         else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
             return new ImageIcon(
-                getClass().getResource("chessImages/BlackKnight.gif")
+                getClass().getResource("../chessImages/BlackKnight.gif")
             );            
         }
         else
         {
             return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif")
+                getClass().getResource("../chessImages/default-Unassigned.gif")
             );            
         }
     }

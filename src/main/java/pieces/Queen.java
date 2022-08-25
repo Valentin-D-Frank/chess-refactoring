@@ -1,9 +1,14 @@
+package pieces;
+
+import game_logic.ChessGameBoard;
+import services.ChessGamePiece;
+
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 // import java.awt.Color;
 // -------------------------------------------------------------------------
 /**
- * Represents a Queen game piece.
+ * Represents a pieces.Queen game piece.
  *
  * @author Ben Katz (bakatz)
  * @author Myles David II (davidmm2)
@@ -11,10 +16,10 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Queen
-    extends ChessGamePiece{
+    extends ChessGamePiece {
     // ----------------------------------------------------------
     /**
-     * Create a new Queen object.
+     * Create a new pieces.Queen object.
      *
      * @param board
      *            the board the queen is on
@@ -25,11 +30,11 @@ public class Queen
      * @param color
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public Queen( ChessGameBoard board, int row, int col, int color ){
+    public Queen(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
     }
     /**
-     * Calculates the possible moves for this Queen.
+     * Calculates the possible moves for this pieces.Queen.
      * @param board the board to check on
      * @return ArrayList<String> the list of moves
      */
@@ -63,18 +68,18 @@ public class Queen
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
             return new ImageIcon(
-                getClass().getResource("chessImages/WhiteQueen.gif")
+                getClass().getResource("../chessImages/WhiteQueen.gif")
             );            
         }
         else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
             return new ImageIcon(
-                getClass().getResource("chessImages/BlackQueen.gif")
+                getClass().getResource("../chessImages/BlackQueen.gif")
             );            
         }
         else
         {
             return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif")
+                getClass().getResource("../chessImages/default-Unassigned.gif")
             ); 
         }
     }

@@ -1,3 +1,7 @@
+package main;
+
+import user_interface.ChessPanel;
+
 import javax.swing.*;
 // -------------------------------------------------------------------------
 /**

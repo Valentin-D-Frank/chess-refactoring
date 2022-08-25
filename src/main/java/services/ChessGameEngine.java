@@ -1,3 +1,10 @@
+package services;
+
+import game_logic.BoardSquare;
+import game_logic.ChessGameBoard;
+import pieces.King;
+import user_interface.ChessPanel;
+
 import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -21,11 +28,11 @@ public class ChessGameEngine{
     private King           king2;
     // ----------------------------------------------------------
     /**
-     * Create a new ChessGameEngine object. Accepts a fully-created
-     * ChessGameBoard. (i.e. all components rendered)
+     * Create a new services.ChessGameEngine object. Accepts a fully-created
+     * game_logic.ChessGameBoard. (i.e. all components rendered)
      *
      * @param board
-     *            the reference ChessGameBoard
+     *            the reference game_logic.ChessGameBoard
      */
     public ChessGameEngine( ChessGameBoard board ){
         firstClick = true;
@@ -128,7 +135,7 @@ public class ChessGameEngine{
         }
     }
     /**
-     * Determines if the requested King is in check.
+     * Determines if the requested pieces.King is in check.
      *
      * @param checkCurrent
      *            if true, will check if the current king is in check if false,

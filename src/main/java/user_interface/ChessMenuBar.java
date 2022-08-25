@@ -1,3 +1,5 @@
+package user_interface;
+
 import java.awt.Component;
 import java.awt.event.*;
 import javax.swing.*;
@@ -14,7 +16,7 @@ public class ChessMenuBar
     extends JMenuBar{
     // ----------------------------------------------------------
     /**
-     * Create a new ChessMenuBar object.
+     * Create a new user_interface.ChessMenuBar object.
      */
     public ChessMenuBar(){
         String[] menuCategories = { "File", "Options", "Help" };

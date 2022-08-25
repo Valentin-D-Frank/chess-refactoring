@@ -1,8 +1,13 @@
+package pieces;
+
+import game_logic.ChessGameBoard;
+import services.ChessGamePiece;
+
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 /**
- * Represents a King game piece.
+ * Represents a pieces.King game piece.
  *
  * @author Ben Katz (bakatz)
  * @author Myles David II (davidmm2)
@@ -10,10 +15,10 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class King
-    extends ChessGamePiece{
+    extends ChessGamePiece {
     // ----------------------------------------------------------
     /**
-     * Create a new King object.
+     * Create a new pieces.King object.
      *
      * @param board
      *            the board to create the king on
@@ -24,7 +29,7 @@ public class King
      * @param color
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public King( ChessGameBoard board, int row, int col, int color ){
+    public King(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color, false );
     }
     /**
@@ -57,7 +62,7 @@ public class King
         return allMoves;
     }
     /**
-     * Determines if this King is checked.
+     * Determines if this pieces.King is checked.
      *
      * @param board
      *            the board to check on
@@ -75,18 +80,18 @@ public class King
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
             return new ImageIcon(
-                getClass().getResource("chessImages/WhiteKing.gif")
+                getClass().getResource("../chessImages/WhiteKing.gif")
             );            
         }
         else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
             return new ImageIcon(
-                getClass().getResource("chessImages/BlackKing.gif" )
+                getClass().getResource("../chessImages/BlackKing.gif" )
             );            
         }
         else
         {
             return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif" )
+                getClass().getResource("../chessImages/default-Unassigned.gif" )
             );            
         }
     }
