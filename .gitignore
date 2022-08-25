@@ -1,6 +1,9 @@
 # Sonar files
 .scannerwork
 
+# Idea files
+.idea
+
 # Compiled class file
 *.class
 
