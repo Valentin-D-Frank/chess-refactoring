@@ -14,3 +14,8 @@ Tambien como evidencia se encuentra la carpeta **Sonar Evidencia Avances**, en l
 # Despues de Refactorizacion
 
 ![alt text](https://github.com/Valentin-D-Frank/chess-refactoring/blob/master/Sonar%20Evidencia%20Avances/Sonar_Refactor_7_Final.png)
+
+# Activadad en el Proceso de Refactorizacion
+
+![alt text](https://github.com/Valentin-D-Frank/chess-refactoring/blob/master/Sonar%20Evidencia%20Avances/Actividad.png)
+
