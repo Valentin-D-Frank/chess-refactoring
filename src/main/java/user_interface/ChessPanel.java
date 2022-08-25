@@ -4,9 +4,9 @@ import game_logic.ChessGameBoard;
 import game_logic.ChessGameLog;
 import game_logic.ChessGraveyard;
 import services.ChessGameEngine;
-import user_interface.ChessMenuBar;
 
 import java.awt.*;
+import java.io.Serializable;
 import javax.swing.*;
 // -------------------------------------------------------------------------
 /**
@@ -18,7 +18,7 @@ import javax.swing.*;
  * @version 2010.11.17
  */
 public class ChessPanel
-    extends JPanel{
+    extends JPanel implements Serializable {
     private ChessMenuBar menuBar;
     private ChessGameBoard gameBoard;
     private ChessGameLog    gameLog;
