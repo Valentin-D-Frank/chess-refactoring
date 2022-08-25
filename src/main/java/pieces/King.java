@@ -42,24 +42,24 @@ public class King
      */
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> northEastMoves = calculateNorthEastMoves( board, 1 );
-        ArrayList<String> northWestMoves = calculateNorthWestMoves( board, 1 );
-        ArrayList<String> southEastMoves = calculateSouthEastMoves( board, 1 );
-        ArrayList<String> southWestMoves = calculateSouthWestMoves( board, 1 );
-        ArrayList<String> northMoves = calculateNorthMoves( board, 1 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 1 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 1 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 1 );
-        ArrayList<String> allMoves = new ArrayList<String>();
-        allMoves.addAll( northEastMoves );
-        allMoves.addAll( northWestMoves );
-        allMoves.addAll( southWestMoves );
-        allMoves.addAll( southEastMoves );
-        allMoves.addAll( northMoves );
-        allMoves.addAll( southMoves );
-        allMoves.addAll( westMoves );
-        allMoves.addAll( eastMoves );
-        return allMoves;
+        ArrayList<String> northEastMovesKing = calculateNorthEastMoves( board, 1 );
+        ArrayList<String> northWestMovesKing = calculateNorthWestMoves( board, 1 );
+        ArrayList<String> southEastMovesKing = calculateSouthEastMoves( board, 1 );
+        ArrayList<String> southWestMovesKing = calculateSouthWestMoves( board, 1 );
+        ArrayList<String> northMovesKing = calculateNorthMoves( board, 1 );
+        ArrayList<String> southMovesKing = calculateSouthMoves( board, 1 );
+        ArrayList<String> eastMovesKing = calculateEastMoves( board, 1 );
+        ArrayList<String> westMovesKing = calculateWestMoves( board, 1 );
+        ArrayList<String> allMovesKing = new ArrayList<>();
+        allMovesKing.addAll( northEastMovesKing );
+        allMovesKing.addAll( northWestMovesKing );
+        allMovesKing.addAll( southEastMovesKing );
+        allMovesKing.addAll( southWestMovesKing );
+        allMovesKing.addAll( northMovesKing );
+        allMovesKing.addAll( southMovesKing );
+        allMovesKing.addAll( eastMovesKing );
+        allMovesKing.addAll( westMovesKing );
+        return allMovesKing;
     }
     /**
      * Determines if this pieces.King is checked.
@@ -69,7 +69,7 @@ public class King
      * @return true if checked, false if not checked
      */
     public boolean isChecked( ChessGameBoard board ){
-        return getCurrentAttackers( board ).size() > 0;
+        return !getCurrentAttackers( board ).isEmpty();
     }
     /**
      * Creates an icon for this piece depending on the piece's color.

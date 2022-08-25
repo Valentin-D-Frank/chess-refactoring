@@ -49,22 +49,38 @@ public class Pawn
      * @return boolean true if the move was successful, false otherwise
      */
     @Override
-    public boolean move(ChessGameBoard board, int row, int col ){
-        if ( super.move( board, row, col ) ){
+    public boolean move(ChessGameBoard board, int row, int col) {
+        if (super.move(board, row, col)) {
             notMoved = false;
-            possibleMoves = calculatePossibleMoves( board );
-            if ( ( getColorOfPiece() == ChessGamePiece.BLACK && row == 7 )
-                || ( getColorOfPiece() == ChessGamePiece.WHITE && row == 0 ) ){ // pawn has reached the end of the board, promote it to queen
-                board.getCell( row, col ).setPieceOnSquare( new Queen(
-                    board,
-                    row,
-                    col,
-                    getColorOfPiece() ) );
+            possibleMoves = calculatePossibleMoves(board);
+            // Pawn has reached the end of the board, promote it to queen
+            if ((getColorOfPiece() == ChessGamePiece.BLACK && row == 7) || (getColorOfPiece() == ChessGamePiece.WHITE && row == 0)) {
+                board.getCell(row, col).setPieceOnSquare(new Queen(board, row, col, getColorOfPiece()));
             }
             return true;
         }
         return false;
     }
+
+    int currentRow (int row){
+        return (getColorOfPiece() == ChessGamePiece.WHITE ? (row - 1) : (row + 1));
+    }
+
+    String movement (String combination){
+        String movement = null;
+        switch (combination) {
+            case "-1 -1":
+                movement = ((pieceRow - 1) + "," + (pieceColumn - 1)); break;
+            case "-1 +1":
+                movement = ((pieceRow - 1) + "," + (pieceColumn + 1)); break;
+            case "+1 -1":
+                movement = ((pieceRow + 1) + "," + (pieceColumn - 1)); break;
+            default:
+                movement = ((pieceRow + 1) + "," + (pieceColumn + 1)); break;
+        }
+        return movement;
+    }
+
     /**
      * Calculates the possible moves for this piece. These are ALL the possible
      * moves, including illegal (but at the same time valid) moves.
@@ -73,14 +89,32 @@ public class Pawn
      *            the game board to calculate moves on
      * @return ArrayList<String> the moves
      */
+    void checkEnemyCapturePoints(ChessGameBoard board, ArrayList<String> moves){
+        if (getColorOfPiece() == ChessGamePiece.WHITE) {
+            if (isEnemy(board, pieceRow - 1, pieceColumn - 1)) {
+                String movement = movement("-1 -1");
+                moves.add(movement);
+            }
+            if (isEnemy(board, pieceRow - 1, pieceColumn + 1)) {
+                String movement = movement("-1 +1");
+                moves.add(movement);
+            }
+        } else {
+            if (isEnemy(board, pieceRow + 1, pieceColumn - 1)) {
+                String movement = movement("+1 -1");
+                moves.add(movement);
+            }
+            if (isEnemy(board, pieceRow + 1, pieceColumn + 1)) {
+                String movement = movement("+1");
+                moves.add(movement);
+            }
+        }
+    }
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> moves = new ArrayList<String>();
+        ArrayList<String> moves = new ArrayList<>();
         if ( isPieceOnScreen() ){
-            int currRow =
-                getColorOfPiece() == ChessGamePiece.WHITE
-                    ? ( pieceRow - 1 )
-                    : ( pieceRow + 1 );
+            int currRow = currentRow(pieceRow);
             int count = 1;
             int maxIter = notMoved ? 2 : 1;
             // check for normal moves
@@ -95,30 +129,11 @@ public class Pawn
                 {
                     break;
                 }
-                currRow =
-                    ( getColorOfPiece() == ChessGamePiece.WHITE )
-                        ? ( currRow - 1 )
-                        : ( currRow + 1 );
+                currRow = currentRow(currRow);
                 count++;
             }
             // check for enemy capture points
-            if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-                if ( isEnemy( board, pieceRow - 1, pieceColumn - 1 ) ){
-                    moves.add( ( pieceRow - 1 ) + "," + ( pieceColumn - 1 ) );
-                }
-                if ( isEnemy( board, pieceRow - 1, pieceColumn + 1 ) ){
-                    moves.add( ( pieceRow - 1 ) + "," + ( pieceColumn + 1 ) );
-                }
-            }
-            else
-            {
-                if ( isEnemy( board, pieceRow + 1, pieceColumn - 1 ) ){
-                    moves.add( ( pieceRow + 1 ) + "," + ( pieceColumn - 1 ) );
-                }
-                if ( isEnemy( board, pieceRow + 1, pieceColumn + 1 ) ){
-                    moves.add( ( pieceRow + 1 ) + "," + ( pieceColumn + 1 ) );
-                }
-            }
+            checkEnemyCapturePoints(board, moves);
         }
         return moves;
     }
@@ -129,21 +144,11 @@ public class Pawn
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("../chessImages/WhitePawn.gif")
-            );            
+        if (getColorOfPiece() == ChessGamePiece.WHITE){
+            return new ImageIcon(getClass().getResource("../chessImages/WhitePawn.gif"));
         }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("../chessImages/BlackPawn.gif")
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("../chessImages/default-Unassigned.gif")
-            );           
-        }
+
+        return (getColorOfPiece() == ChessGamePiece.BLACK) ? new ImageIcon(getClass().getResource("../chessImages/BlackPawn.gif")) :
+                new ImageIcon(getClass().getResource("../chessImages/default-Unassigned.gif"));
     }
 }
