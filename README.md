@@ -5,7 +5,7 @@ En el presente repositorio se realizo el mantenimiento y refactorizacion de una 
 
 En este repositorio se encuentra tambien como evidencia la carpeta **Complejidad Inicial** en la que se encuentran capturas de la complejidad de los metodos de la aplicacion, esta parte del analisis me permitio conocer que clases eran las que tenian mayor complejidad, las cuales en el proceso de refactorizacion fueron descompuestas en metodos con responsabilidad unica.
 
-Tambien como evidencia se encuentra la carpeta ** Sonar Evidencia Avances **, en la que se encuentran capturas del analisis y escaneo realizado con SonarQube, en dichas capturas se puede apreciar el avance sistematico que se realizo partiendo de los paquetes previamente separados conforme a la programacion orientada objetos. Partiendo de aquellas clases con menor cantidad de Code Smells para finalmente llegar a las que contenian el mayor porcentaje en el proyecto.
+Tambien como evidencia se encuentra la carpeta **Sonar Evidencia Avances**, en la que se encuentran capturas del analisis y escaneo realizado con SonarQube, en dichas capturas se puede apreciar el avance sistematico que se realizo partiendo de los paquetes previamente separados conforme a la programacion orientada objetos. Partiendo de aquellas clases con menor cantidad de Code Smells para finalmente llegar a las que contenian el mayor porcentaje en el proyecto.
 
 # Antes de Refactorizacion
 
