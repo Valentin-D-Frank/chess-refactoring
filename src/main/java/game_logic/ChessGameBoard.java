@@ -1,16 +1,17 @@
 package game_logic;
 
-import game_logic.BoardSquare;
 import pieces.*;
 import services.ChessGamePiece;
 import user_interface.ChessPanel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.List;
 // -------------------------------------------------------------------------
 /**
  * The panel that represents the Chess game board. Contains a few methods that
@@ -21,7 +22,7 @@ import java.awt.GridLayout;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class ChessGameBoard extends JPanel{
+public class ChessGameBoard extends JPanel {
     private BoardSquare[][] chessCells;
     private BoardListener   listener;
     // ----------------------------------------------------------
@@ -80,8 +81,8 @@ public class ChessGameBoard extends JPanel{
      *
      * @return ArrayList<GamePiece> the pieces
      */
-    public ArrayList<ChessGamePiece> getAllWhitePieces(){
-        ArrayList<ChessGamePiece> whitePieces = new ArrayList<ChessGamePiece>();
+    public List<ChessGamePiece> getAllWhitePieces(){
+        List<ChessGamePiece> whitePieces = new ArrayList<>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -99,8 +100,8 @@ public class ChessGameBoard extends JPanel{
      *
      * @return ArrayList<GamePiece> the pieces
      */
-    public ArrayList<ChessGamePiece> getAllBlackPieces(){
-        ArrayList<ChessGamePiece> blackPieces = new ArrayList<ChessGamePiece>();
+    public List<ChessGamePiece> getAllBlackPieces(){
+        List<ChessGamePiece> blackPieces = new ArrayList<>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -155,9 +156,48 @@ public class ChessGameBoard extends JPanel{
             }
         }
         repaint();
-        //revalidate();
-        // only the combination of these two calls work...*shrug*
     }
+
+    public ChessGamePiece agregarPieza(int i, int j){
+
+        ChessGamePiece pieceToAdd;
+
+        switch (i) {
+            case 1:
+                pieceToAdd = new Pawn( this, i, j, ChessGamePiece.BLACK ); break;
+            case 6:
+                pieceToAdd = new Pawn( this, i, j, ChessGamePiece.WHITE ); break;
+            case 0: case 7:
+                int colNum = i == 0 ? ChessGamePiece.BLACK : ChessGamePiece.WHITE;
+                pieceToAdd = agregarPiezaPrincipal(i, j, colNum);
+                break;
+            default:
+                pieceToAdd = null;
+                break;
+        }
+        return pieceToAdd;
+    }
+
+    public ChessGamePiece agregarPiezaPrincipal(int i, int j, int colNum ){
+
+        ChessGamePiece pieceToAdd;
+
+        switch (j) {
+            case 0: case 7:
+                pieceToAdd = new Rook( this, i, j, colNum ); break;
+            case 1: case 6:
+                pieceToAdd = new Knight( this, i, j, colNum ); break;
+            case 2: case 5:
+                pieceToAdd = new Bishop( this, i, j, colNum ); break;
+            case 3:
+                pieceToAdd = new King( this, i, j, colNum ); break;
+            default:
+                pieceToAdd = new Queen( this, i, j, colNum ); break;
+        }
+
+        return pieceToAdd;
+    }
+
     /**
      * (Re)initializes this game_logic.ChessGameBoard to its default layout with all 32
      * pieces added.
@@ -166,41 +206,11 @@ public class ChessGameBoard extends JPanel{
         resetBoard( false );
         for ( int i = 0; i < chessCells.length; i++ ){
             for ( int j = 0; j < chessCells[0].length; j++ ){
-                ChessGamePiece pieceToAdd;
-                if ( i == 1 ) // black pawns
-                {
-                    pieceToAdd = new Pawn( this, i, j, ChessGamePiece.BLACK );
-                }
-                else if ( i == 6 ) // white pawns
-                {
-                    pieceToAdd = new Pawn( this, i, j, ChessGamePiece.WHITE );
-                }
-                else if ( i == 0 || i == 7 ) // main rows
-                {
-                    int colNum =
-                        i == 0 ? ChessGamePiece.BLACK : ChessGamePiece.WHITE;
-                    if ( j == 0 || j == 7 ){
-                        pieceToAdd = new Rook( this, i, j, colNum );
-                    }
-                    else if ( j == 1 || j == 6 ){
-                        pieceToAdd = new Knight( this, i, j, colNum );
-                    }
-                    else if ( j == 2 || j == 5 ){
-                        pieceToAdd = new Bishop( this, i, j, colNum );
-                    }
-                    else if ( j == 3 ){
-                        pieceToAdd = new King( this, i, j, colNum );
-                    }
-                    else
-                    {
-                        pieceToAdd = new Queen( this, i, j, colNum );
-                    }
-                }
-                else
-                {
-                    pieceToAdd = null;
-                }
-                chessCells[i][j] = new BoardSquare( i, j, pieceToAdd );
+
+                ChessGamePiece added = agregarPieza(i, j);
+
+                chessCells[i][j] = new BoardSquare( i, j, added );
+
                 if ( ( i + j ) % 2 == 0 ){
                     chessCells[i][j].setBackground( Color.WHITE );
                 }
@@ -239,7 +249,7 @@ public class ChessGameBoard extends JPanel{
      * @version 2010.11.16
      */
     private class BoardListener
-        implements MouseListener
+        implements MouseListener, Serializable
     {
         /**
          * Do an action when the left mouse button is clicked.
